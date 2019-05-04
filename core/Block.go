@@ -42,7 +42,9 @@ func GenerateNewBlock(preBlock Block, data string) Block {
 func GenerateGenesisBlock() Block {
 	preBlock := Block{}
 	preBlock.Index = -1
-	preBlock.Hash = ""
+	preBlock.Timestmp = time.Now().Unix()
+	preBlock.Hash = CalculateHash(preBlock)
+	preBlock.Data = "Genesis Block(创始区块)"
 	GenerateNewBlock(preBlock, "Genesis Block")
 	return preBlock
 }
