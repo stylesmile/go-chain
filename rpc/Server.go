@@ -17,6 +17,7 @@ func run() {
 	http.ListenAndServe("localhost:8080", nil)
 }
 
+// 读数据
 func blockchainGetHandler(w http.ResponseWriter, r *http.Request) {
 	bytes, error := json.Marshal(blockchain)
 	if error != nil {
@@ -27,6 +28,7 @@ func blockchainGetHandler(w http.ResponseWriter, r *http.Request) {
 	io.WriteString(w, string(bytes))
 }
 
+// 写数据
 func blockchainWriteHandler(w http.ResponseWriter, r *http.Request) {
 	blockData := r.URL.Query().Get("data")
 	blockchain.SendData(blockData)
