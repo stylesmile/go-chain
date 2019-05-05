@@ -9,11 +9,12 @@ import (
 
 var blockchain *core.Blockchain
 
+// http server
 func run() {
 	// 对外暴露端口
 	http.HandleFunc("/blockchain/get", blockchainGetHandler)
 	http.HandleFunc("/blockchain/write", blockchainWriteHandler)
-	// 监听端口8888
+	// 监听端口8080
 	http.ListenAndServe("localhost:8080", nil)
 }
 

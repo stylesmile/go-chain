@@ -6,10 +6,11 @@ import (
 )
 
 type Blockchain struct {
-	// 数组
+	// 集合 区块链
 	Blocks []*Block
 }
 
+// 区块链
 func NewBlockchain() *Blockchain {
 	genesisBlock := GenerateGenesisBlock()
 	blockchain := Blockchain{}
@@ -17,12 +18,14 @@ func NewBlockchain() *Blockchain {
 	return &blockchain
 }
 
+// 发送数据
 func (bc *Blockchain) SendData(data string) {
 	proBlock := bc.Blocks[len(bc.Blocks)-1]
 	newBlock := GenerateNewBlock(*proBlock, data)
 	bc.ApendBlock(&newBlock)
 }
 
+// 添加区块
 func (bc *Blockchain) ApendBlock(newBlock *Block) {
 	// 防止越界
 	if len(bc.Blocks) == 0 {
@@ -36,6 +39,7 @@ func (bc *Blockchain) ApendBlock(newBlock *Block) {
 	}
 }
 
+// 后台数据结构
 func (bc *Blockchain) Print() {
 	// 下划线表示赋值是忽略的
 	for _, block := range bc.Blocks {
@@ -48,6 +52,7 @@ func (bc *Blockchain) Print() {
 	}
 }
 
+// 验证相邻的2个区块数据是否正确
 func isValid(newBlock Block, oldBlock Block) bool {
 	if newBlock.Index-1 != oldBlock.Index {
 		return false
